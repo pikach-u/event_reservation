@@ -1,5 +1,6 @@
 package com.pikachu.event_reservation.service;
 
+import com.pikachu.event_reservation.dto.EventDto;
 import com.pikachu.event_reservation.model.Event;
 import com.pikachu.event_reservation.repository.EventRepository;
 import jakarta.transaction.Transactional;
@@ -36,12 +37,22 @@ public class EventService {
         return eventRepository.findById(id).orElseThrow(() -> new NoSuchElementException("이벤트가 존재하지 않습니다."));
     }
 
-    public Event create(Event event) {
+    public Event create(EventDto eventDto) {
+        Event event = new Event();
+        event.setName(eventDto.getName());
+        event.setEventDate(eventDto.getEventDate());
+        event.setLocation(eventDto.getLocation());
+
         return eventRepository.save(event);
     }
 
-    public Event update(Long id, Event event) {
+    public Event update(Long id, EventDto eventDto) {
+        Event event = getById(id);
+        event.setName(eventDto.getName());
+        event.setEventDate(eventDto.getEventDate());
+        event.setLocation(eventDto.getLocation());
 
+        return eventRepository.save(event);
     }
 
     public void delete(Long id) {

@@ -39,6 +39,11 @@ public class EventController {
         return eventService.getById(id);
     }
 
+    @PutMapping("/{id}")
+    public Event update(@PathVariable Long id, @Valid @RequestBody EventDto eventDto) {
+        return eventService.update(id, eventDto);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         eventService.delete(id);
@@ -47,11 +52,6 @@ public class EventController {
 
     @PostMapping
     public Event create(@Valid @RequestBody EventDto eventDto) {
-        Event event = new Event();
-        event.setName(eventDto.getName());
-        event.setEventDate(eventDto.getEventDate());
-        event.setLocation(eventDto.getLocation());
-
-        return eventService.create(event);
+        return eventService.create(eventDto);
     }
 }
