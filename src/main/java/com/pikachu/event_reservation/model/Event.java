@@ -26,7 +26,7 @@ public class Event {
     private String name;
 
     @Column(name = "event_date", nullable = false)
-    private LocalDateTime eventData;
+    private LocalDateTime eventDate;
 
     private String location;
 
